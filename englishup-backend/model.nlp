@@ -1,0 +1,279 @@
+{
+  "settings": {
+    "languages": [
+      "en"
+    ],
+    "forceNER": true,
+    "tag": "nlp",
+    "threshold": 0.5,
+    "autoLoad": true,
+    "autoSave": true,
+    "modelFileName": "model.nlp",
+    "executeActionsBeforeAnswers": false,
+    "calculateSentiment": true
+  },
+  "nluManager": {
+    "settings": {
+      "tag": "nlu-manager"
+    },
+    "locales": [
+      "en"
+    ],
+    "languageNames": {},
+    "domainManagers": {
+      "en": {
+        "settings": {
+          "locale": "en",
+          "trainByDomain": false,
+          "tag": "domain-manager-en",
+          "nluByDomain": {
+            "default": {
+              "className": "NeuralNlu",
+              "settings": {}
+            }
+          },
+          "useStemDict": true
+        },
+        "stemDict": {
+          "do,english,hello,how,i,in,say": {
+            "intent": "greeting.hello",
+            "domain": "default"
+          },
+          "go,is,of,past,tens,the,what": {
+            "intent": "grammar.past",
+            "domain": "default"
+          }
+        },
+        "intentDict": {
+          "greeting.hello": "default",
+          "grammar.past": "default"
+        },
+        "sentences": [
+          {
+            "domain": "default",
+            "utterance": "How do I say hello in English?",
+            "intent": "greeting.hello"
+          },
+          {
+            "domain": "default",
+            "utterance": "What is the past tense of go?",
+            "intent": "grammar.past"
+          }
+        ],
+        "domains": {
+          "master_domain": {
+            "settings": {
+              "locale": "en",
+              "tag": "nlu-en",
+              "keepStopwords": true,
+              "nonefeatureValue": 1,
+              "nonedeltaMultiplier": 1.2,
+              "spellCheck": false,
+              "spellCheckDistance": 1,
+              "filterZeros": true,
+              "log": true
+            },
+            "features": {
+              "how": 1,
+              "do": 1,
+              "i": 1,
+              "say": 1,
+              "hello": 1,
+              "in": 1,
+              "english": 1,
+              "what": 1,
+              "is": 1,
+              "the": 1,
+              "past": 1,
+              "tens": 1,
+              "of": 1,
+              "go": 1
+            },
+            "intents": {
+              "greeting.hello": 1,
+              "grammar.past": 1
+            },
+            "intentFeatures": {
+              "greeting.hello": {
+                "how": 1,
+                "do": 1,
+                "i": 1,
+                "say": 1,
+                "hello": 1,
+                "in": 1,
+                "english": 1
+              },
+              "grammar.past": {
+                "what": 1,
+                "is": 1,
+                "the": 1,
+                "past": 1,
+                "tens": 1,
+                "of": 1,
+                "go": 1
+              }
+            },
+            "featuresToIntent": {
+              "how": [
+                "greeting.hello"
+              ],
+              "do": [
+                "greeting.hello"
+              ],
+              "i": [
+                "greeting.hello"
+              ],
+              "say": [
+                "greeting.hello"
+              ],
+              "hello": [
+                "greeting.hello"
+              ],
+              "in": [
+                "greeting.hello"
+              ],
+              "english": [
+                "greeting.hello"
+              ],
+              "what": [
+                "grammar.past"
+              ],
+              "is": [
+                "grammar.past"
+              ],
+              "the": [
+                "grammar.past"
+              ],
+              "past": [
+                "grammar.past"
+              ],
+              "tens": [
+                "grammar.past"
+              ],
+              "of": [
+                "grammar.past"
+              ],
+              "go": [
+                "grammar.past"
+              ]
+            },
+            "neuralNetwork": {
+              "settings": {
+                "locale": "en",
+                "tag": "nlu-en",
+                "keepStopwords": true,
+                "nonefeatureValue": 1,
+                "nonedeltaMultiplier": 1.2,
+                "spellCheck": false,
+                "spellCheckDistance": 1,
+                "filterZeros": true,
+                "log": true
+              },
+              "features": [
+                "how",
+                "do",
+                "i",
+                "say",
+                "hello",
+                "in",
+                "english",
+                "what",
+                "is",
+                "the",
+                "past",
+                "tens",
+                "of",
+                "go"
+              ],
+              "intents": [
+                "greeting.hello",
+                "grammar.past"
+              ],
+              "perceptrons": [
+                [
+                  1.885350227355957,
+                  1.885350227355957,
+                  1.885350227355957,
+                  1.885350227355957,
+                  1.885350227355957,
+                  1.885350227355957,
+                  1.885350227355957,
+                  -0.15674753487110138,
+                  -0.15674753487110138,
+                  -0.15674753487110138,
+                  -0.15674753487110138,
+                  -0.15674753487110138,
+                  -0.15674753487110138,
+                  -0.15674753487110138,
+                  0.8364760714706954
+                ],
+                [
+                  -0.1566670536994934,
+                  -0.1566670536994934,
+                  -0.1566670536994934,
+                  -0.1566670536994934,
+                  -0.1566670536994934,
+                  -0.1566670536994934,
+                  -0.1566670536994934,
+                  1.885345458984375,
+                  1.885345458984375,
+                  1.885345458984375,
+                  1.885345458984375,
+                  1.885345458984375,
+                  1.885345458984375,
+                  1.885345458984375,
+                  0.8365109896399703
+                ]
+              ]
+            }
+          }
+        }
+      }
+    },
+    "intentDomains": {},
+    "extraSentences": [
+      [
+        "en",
+        "How do I say hello in English?"
+      ],
+      [
+        "en",
+        "What is the past tense of go?"
+      ]
+    ]
+  },
+  "ner": {
+    "settings": {
+      "tag": "ner",
+      "entityPreffix": "%",
+      "entitySuffix": "%"
+    },
+    "rules": {}
+  },
+  "nlgManager": {
+    "settings": {
+      "tag": "nlg-manager"
+    },
+    "responses": {
+      "en": {
+        "greeting.hello": [
+          {
+            "answer": "Hello! That is how you greet in English."
+          }
+        ],
+        "grammar.past": [
+          {
+            "answer": "The past tense of go is went."
+          }
+        ]
+      }
+    }
+  },
+  "actionManager": {
+    "settings": {
+      "tag": "action-manager"
+    },
+    "actions": {}
+  },
+  "slotManager": {}
+}
