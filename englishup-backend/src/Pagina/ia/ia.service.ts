@@ -17,17 +17,7 @@ export class AiService {
   async generateQuestions(topic:string): Promise<any[]> {
     const apiKey = process.env.GOOGLE_API_KEY;
     const randomSeed = Math.floor(Math.random() * 1000000);
-    const prompt = `Create 10 unique multiple-choice questions in English about the "${topic}" tense. 
-Each time, ensure different questions by using this seed: ${randomSeed}.
-Each question must have 4 options. Mark the correct one with * at the beginning.
-Return ONLY a valid JSON array, no additional text or markdown:
-[
-  {
-    "id": 1,
-    "question": "What ___ you ___ right now?",
-    "options": ["*are/doing", "is/doing", "are/do", "do/doing"]
-  }
-]`;
+    const prompt = `Create 10 unique multiple-choice questions in English about the "${topic}" tense.\nEach time, ensure different questions by using this seed: ${randomSeed}.\nEach question must have 4 options in random order. Indicate the correct answer by its index (starting from 0) in a field called correctIndex. Do NOT use asterisks or any other marks in the options.\nReturn ONLY a valid JSON array, no additional text or markdown:\n[\n  {\n    "id": 1,\n    "question": "What ___ you ___ right now?",\n    "options": ["are/doing", "is/doing", "are/do", "do/doing"],\n    "correctIndex": 0\n  }\n]`;
 
 
     const errors: Array<{ model: string; status?: number; message?: string; error?: string }> = [];
@@ -72,9 +62,8 @@ Return ONLY a valid JSON array, no additional text or markdown:
 
         const jsonMatch = jsonText.match(/\[[\s\S]*\]/);
         if (jsonMatch) {
-          const json = JSON.parse(jsonMatch[0]);
-
-          if (Array.isArray(json) && json.length > 0 && json[0].question && json[0].options) {
+          let json = JSON.parse(jsonMatch[0]);
+          if (Array.isArray(json) && json.length > 0 && json[0].question && json[0].options && typeof json[0].correctIndex === 'number') {
             console.log(`✅ Generated ${json.length} questions with ${model}`);
             return json;
           }
@@ -92,20 +81,17 @@ Return ONLY a valid JSON array, no additional text or markdown:
         });
 
         errors.push({ model, status, message: errorMsg });
-
-        // Si es 503 (sobrecarga), intentar con el siguiente modelo
+      
         if (status === 503) {
           console.log(`⏭️ Model ${model} overloaded, trying next model...`);
           continue;
         }
-
-        // Si es otro error, también intentar con el siguiente
+        
         console.log(`⏭️ Error with ${model}, trying next model...`);
         continue;
       }
     }
-
-    // Si todos los modelos fallaron, lanzar excepción
+   
     console.error('❌ All models failed:', errors);
     throw new HttpException(
       {
