@@ -106,21 +106,39 @@ export class AiService {
    async generateWordsByTopic(topic: string): Promise<any[]> {
     const apiKey = process.env.GOOGLE_API_KEY;
     const randomSeed = Math.floor(Math.random() * 1000000);
-
     const prompt = `
-Generate 10 vocabulary words related to the topic "${topic}".
-Return ONLY a valid JSON array (no markdown, no text outside JSON) with the following format:
+Genera 10 palabras de vocabulario relacionadas con el tema "${topic}".
+
+DEVUELVE ÚNICAMENTE un array JSON válido (sin texto, sin markdown, sin comentarios fuera del JSON) con exactamente este formato:
+
 [
   {
+    "id": 1,
     "word": "hotel",
     "meaning_es": "un lugar donde las personas se alojan temporalmente",
     "meaning_en": "a place where people stay temporarily",
-    "pronunciation": "hoh-tel"
+    "pronunciation": "/hoʊˈtɛl/",         // IPA: pronunciación EN INGLÉS (para que un hispanohablante aprenda a decir la palabra en inglés)
+    "respelling_es": "joh-TEL"             // Transcripción en ortografía española (opcional, ayuda para hispanohablantes)
   }
 ]
-Make sure all entries are unique and the JSON is valid.
-Use this random seed to vary results: ${randomSeed}.
+
+REGLAS IMPORTANTES:
+- Deben ser exactamente 10 entradas numeradas del 1 al 10 en "id".
+- Todas las entradas deben ser únicas (no repetir palabras ni sinónimos evidentes).
+- "meaning_en" debe usar inglés simple, adecuado para estudiantes.
+- "meaning_es" debe explicar claramente en español.
+- "pronunciation" debe contener **solo** la transcripción en **IPA** de la pronunciación en inglés (ejemplos válidos: "/əˈbaʊt/", "/ˈrɛl.eɪ.ʃənˌʃɪp/", "/ˈaɪsˌkriːm/", "/ˈwɪndoʊ/").
+- Asegúrate de que la IPA sea **correcta y estándar** (si hay varias variantes, elige la pronunciación más común en inglés americano).
+- Añade además "respelling_es" con una guía de lectura en ortografía española para ayudar a hispanohablantes a pronunciar la palabra (usa mayúsculas para sílabas tónicas, p. ej. "i-DAH" o "yo-TEL").
+- No incluyas explicaciones, disclaimers ni texto fuera del JSON.
+- Evita palabras extremadamente básicas repetidas (como "hotel", "food", "car") cuando ya hayan aparecido en ejemplos previos; busca variedad relevante al tema.
+- Usa el seed aleatorio: ${randomSeed} (usa este número para variar resultados internamente si tu modelo lo soporta).
+
+Si la salida no es JSON válido, devuelve solo el JSON en el siguiente intento — nada más.
 `;
+
+
+
 
     const errors: Array<{ model: string; status?: number; message?: string; error?: string }> = [];
 

@@ -1,26 +1,33 @@
 import { Injectable } from '@nestjs/common';
 import { CreateRegistroDto } from './dto/create-registro.dto';
-import { UpdateRegistroDto } from './dto/update-registro.dto';
+import { createClient } from '@supabase/supabase-js'
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 @Injectable()
 export class RegistroService {
+
+  public supabaseServer = createClient(
+    process.env.SUPABASE_URL!,
+    process.env.SUPABASE_KEY!
+  )
+
   create(createRegistroDto: CreateRegistroDto) {
-    return 'This action adds a new registro';
+    
+    return this.supabaseServer.from('usuarios').insert([
+      {
+        nombre_completo: createRegistroDto.nombre,
+        correo: createRegistroDto.correo,
+        password_hash: createRegistroDto.contrasena,
+        fecha_creacion: createRegistroDto.fecha_creacion
+      }
+    ]).then(({ error, data }) => {
+      if (error) {        
+        return { ok: false, message: error.message };
+      }
+      return { ok: true, data };
+    });
   }
 
-  findAll() {
-    return `This action returns all registro`;
-  }
 
-  findOne(id: number) {
-    return `This action returns a #${id} registro`;
-  }
-
-  update(id: number, updateRegistroDto: UpdateRegistroDto) {
-    return `This action updates a #${id} registro`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} registro`;
-  }
 }
