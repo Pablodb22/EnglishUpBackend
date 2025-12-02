@@ -16,4 +16,7 @@ export class Registro {
 
     fecha_creacion:string;
 
+    @Column("nivel")
+    nivel:string;
+
 }

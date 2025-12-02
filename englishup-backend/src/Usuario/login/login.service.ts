@@ -39,8 +39,9 @@ async findOne(createLoginDto: CreateLoginDto) {
     if (!contrasenaValida) {
       return { ok: false, message: 'Contraseña incorrecta' };
     }
-
-    return { ok: true, data: userData };
+    const usuario = {nombre_completo: userData.nombre_completo, correo: userData.correo,  nivel: userData.nivel, fecha_creacion: userData.fecha_creacion};
+    
+    return { ok: true, data: usuario };
 
   } catch (compareError) {    
     console.error("Error al comparar contraseñas:", compareError);

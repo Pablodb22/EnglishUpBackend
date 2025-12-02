@@ -14,23 +14,27 @@ export class RegistroService {
     process.env.SUPABASE_KEY!
   )
 
-  create(createRegistroDto: CreateRegistroDto) {
+  async create(createRegistroDto: CreateRegistroDto) {
     
     const contrasenaHash = bcrypt.hashSync(createRegistroDto.contrasena, 10);
-
-    return this.supabaseServer.from('usuarios').insert([
+      
+    const  { data: userData, error: userError }= await this.supabaseServer
+    .from('usuarios')
+    .insert([
       {
         nombre_completo: createRegistroDto.nombre,
         correo: createRegistroDto.correo,
         password_hash: contrasenaHash,
-        fecha_creacion: createRegistroDto.fecha_creacion
+        fecha_creacion: createRegistroDto.fecha_creacion,
+        nivel: createRegistroDto.nivel
       }
-    ]).then(({ error, data }) => {
-      if (error) {        
-        return { ok: false, message: error.message };
-      }
-      return { ok: true, data };
-    });
+    ]);
+
+    if (userError) {        
+      return { ok: false, message: userError.message };
+    }
+    return { ok: true, data: userData };
+
   }
 
 
