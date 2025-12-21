@@ -17,8 +17,33 @@ export class AiService {
   async generateQuestions(topic:string): Promise<any[]> {
     const apiKey = process.env.GOOGLE_API_KEY;
     const randomSeed = Math.floor(Math.random() * 1000000);
-    const prompt = `Create 10 unique multiple-choice questions in English about the "${topic}" tense.\nEach time, ensure different questions by using this seed: ${randomSeed}.\nEach question must have 4 options in random order. Indicate the correct answer by its index (starting from 0) in a field called correctIndex. Do NOT use asterisks or any other marks in the options.\nReturn ONLY a valid JSON array, no additional text or markdown:\n[\n  {\n    "id": 1,\n    "question": "What ___ you ___ right now?",\n    "options": ["are/doing", "is/doing", "are/do", "do/doing"],\n    "correctIndex": 0\n  }\n]`;
-
+    let prompt= ''
+    if (topic !== "prueba") {
+  prompt = `Create 10 unique multiple-choice questions in English about the "${topic}" tense.\nEach time, ensure different questions by using this seed: ${randomSeed}.\nEach question must have 4 options in random order. Indicate the correct answer by its index (starting from 0) in a field called correctIndex. Do NOT use asterisks or any other marks in the options.\nReturn ONLY a valid JSON array, no additional text or markdown:\n[\n  {\n    "id": 1,\n    "question": "What ___ you ___ right now?",\n    "options": ["are/doing", "is/doing", "are/do", "do/doing"],\n    "correctIndex": 0\n  }\n]`;
+  } else {  
+    prompt = `Create a comprehensive English placement test with 10 unique multiple-choice questions to determine the user's level (A1, A2, B1, B2, C1, C2).
+      The questions must scale in difficulty as follows:
+      - Questions 1-2: A1 (Basic grammar/vocab)
+      - Questions 3-4: A2 (Simple past/comparatives)
+      - Questions 5-6: B1 (Intermediate/Present Perfect)
+      - Questions 7-8: B2 (Upper intermediate/Conditionals)
+      - Question 9: C1 (Advanced/Inversions)
+      - Question 10: C2 (Proficiency/Nuance/Idioms)
+      
+      Each question must have 4 options. Indicate the correct answer by its index (0-3) in "correctIndex". 
+      Include a field "difficulty" (e.g., "B1") in each object.
+      Use this seed for variety: ${randomSeed}.
+      Return ONLY a valid JSON array, no markdown or extra text:
+      [
+        {
+          "id": 1,
+          "level": "A1",
+          "question": "...",
+          "options": ["...", "...", "...", "..."],
+          "correctIndex": 0
+        }
+      ]`;
+  }
 
     const errors: Array<{ model: string; status?: number; message?: string; error?: string }> = [];
 

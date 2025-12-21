@@ -1,12 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { CreateModificarDto } from './dto/create-modificar.dto';
 import { createClient } from '@supabase/supabase-js'
+import { CreateModificarNivelDto } from './dto/create-modificarnivel.dto';
 import * as dotenv from 'dotenv';
 
 
 dotenv.config();
 @Injectable()
 export class ModificarService {
+ 
 
    public supabaseServer = createClient(
       process.env.SUPABASE_URL!,
@@ -14,8 +16,7 @@ export class ModificarService {
     )
 
     async modify(createModificarDto: CreateModificarDto) {
-    try {
-      // Agregar await y capturar la respuesta
+    try {      
       const { data, error } = await this.supabaseServer
         .from('usuarios')
         .update({
@@ -36,4 +37,27 @@ export class ModificarService {
       return { ok: false, message: 'Error al modificar el perfil' };
     }
   }
+
+async modifyNivel(CreateModificarNivelDto: CreateModificarNivelDto) {
+  try {
+    console.log('Modificando nivel con datos:', CreateModificarNivelDto); 
+    
+    const { data, error } = await this.supabaseServer
+      .from('usuarios')
+      .update({ nivel: CreateModificarNivelDto.nivel })
+      .eq('correo', CreateModificarNivelDto.correo) 
+
+    if (error) {
+      console.log('❌ Error al modificar nivel:', error);
+      return { ok: false, message: error.message };
+    }
+
+    console.log('✅ Nivel modificado correctamente:', data);
+    return { ok: true, message: 'Nivel modificado correctamente', data };
+
+  } catch (error) {
+    console.log('❌ Error al modificar nivel:', error);
+    return { ok: false, message: 'Error al modificar el nivel' };
+  }
+}
 }
