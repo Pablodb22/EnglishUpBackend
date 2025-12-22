@@ -1,98 +1,184 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# 🎓 EnglishUp
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Una plataforma interactiva de aprendizaje de inglés que combina inteligencia artificial con ejercicios prácticos para mejorar tus habilidades gramaticales y de vocabulario.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+![EnglishUp](https://img.shields.io/badge/Status-Live-success)
+![Next.js](https://img.shields.io/badge/Next.js-14-black)
+![NestJS](https://img.shields.io/badge/NestJS-10-red)
+![Supabase](https://img.shields.io/badge/Supabase-Database-green)
 
-## Description
+## 🌐 Demo
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+**Aplicación en vivo:** [https://english-up-gamma.vercel.app/](https://english-up-gamma.vercel.app/)
 
-## Project setup
+## 📦 Repositorios
 
-```bash
-$ npm install
+- **Frontend:** [https://github.com/Pablodb22/EnglishUpFrontend](https://github.com/Pablodb22/EnglishUpFrontend)
+- **Backend:** [https://github.com/Pablodb22/EnglishUpBackend](https://github.com/Pablodb22/EnglishUpBackend)
+
+## ✨ Características principales
+
+### 🔐 Gestión de usuarios
+- Sistema completo de registro y autenticación
+- Perfil de usuario editable
+- Gestión de datos personales
+
+### 📊 Evaluación de nivel
+- Prueba de nivel inicial para determinar tu punto de partida
+- Clasificación automática según tus conocimientos
+
+### 📚 Módulo de gramática
+- Ejercicios organizados por niveles de dificultad
+- Tests dinámicos generados con Google AI API
+- Preguntas únicas en cada sesión para evitar memorización
+- Práctica adaptada a tu nivel actual
+
+### 💬 Módulo de vocabulario
+- Vocabulario organizado por temas específicos
+- Palabras generadas dinámicamente mediante IA
+- Pronunciación de palabras con Web Speech API
+- Audio en tiempo real para mejorar la pronunciación
+
+## 🛠️ Stack tecnológico
+
+### Frontend
+- **Framework:** Next.js 14
+- **Estilos:** Bootstrap 5
+- **Audio:** Web Speech API (SpeechSynthesis)
+- **Despliegue:** Vercel
+
+### Backend
+- **Framework:** NestJS
+- **Base de datos:** Supabase (PostgreSQL)
+- **Despliegue:** Railway
+- **IA:** Google AI API (Gemini)
+
+## 🚀 Arquitectura
+
+```
+┌─────────────────┐         ┌─────────────────┐
+│                 │         │                 │
+│  Next.js        │────────▶│   NestJS        │
+│  (Vercel)       │         │   (Railway)     │
+│                 │         │                 │
+└─────────────────┘         └────────┬────────┘
+         │                           │
+         │                           │
+         ▼                           ▼
+┌─────────────────┐         ┌─────────────────┐
+│  Web Speech API │         │    Supabase     │
+│  (Browser)      │         │   (Database)    │
+└─────────────────┘         └────────┬────────┘
+                                     │
+                                     ▼
+                            ┌─────────────────┐
+                            │  Google AI API  │
+                            │    (Gemini)     │
+                            └─────────────────┘
 ```
 
-## Compile and run the project
+## 📋 Funcionalidades detalladas
 
+### Sistema de IA integrado
+La aplicación utiliza Google AI API para:
+- Generar preguntas de gramática únicas y contextualizadas
+- Crear listas de vocabulario dinámicas y variadas
+- Adaptar el contenido según el nivel del usuario
+- Evitar la repetición de ejercicios
+
+### Sistema de audio
+Implementación de Web Speech API para:
+- Pronunciación automática de palabras de vocabulario
+- Mejora de la comprensión auditiva
+- Aprendizaje de la fonética correcta del inglés
+
+## 🎯 Flujo de usuario
+
+1. **Registro/Login** → Crear cuenta o iniciar sesión
+2. **Prueba de nivel** → Realizar test inicial para determinar nivel
+3. **Selección de módulo** → Elegir entre Gramática o Vocabulario
+4. **Práctica** → Realizar ejercicios adaptados a tu nivel
+5. **Progreso** → Seguimiento de tu evolución
+
+## 🔧 Instalación local
+
+### Prerequisitos
+- Node.js 18+
+- npm o yarn
+- Cuenta de Supabase
+- API Key de Google AI
+
+### Frontend
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+git clone https://github.com/Pablodb22/EnglishUpFrontend
+cd EnglishUpFrontend
+npm install
+npm run dev
 ```
 
-## Run tests
-
+### Backend
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+git clone https://github.com/Pablodb22/EnglishUpBackend
+cd EnglishUpBackend
+npm install
+npm run start:dev
 ```
 
-## Deployment
+### Variables de entorno
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+**Frontend (.env.local)**
+```env
+NEXT_PUBLIC_API_URL=tu_url_backend
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+**Backend (.env)**
+```env
+SUPABASE_URL=tu_supabase_url
+SUPABASE_KEY=tu_supabase_key
+GOOGLE_AI_API_KEY=tu_google_ai_key
+```
 
-## Resources
+## 🌟 Ventajas de la plataforma
 
-Check out a few resources that may come in handy when working with NestJS:
+- ✅ Contenido siempre fresco y dinámico
+- ✅ Aprendizaje adaptativo según tu nivel
+- ✅ Práctica de pronunciación integrada
+- ✅ Interfaz intuitiva y responsive
+- ✅ Progreso personalizado
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+## 📱 Responsive Design
 
-## Support
+La aplicación está completamente optimizada para:
+- 💻 Desktop
+- 📱 Tablets
+- 📱 Móviles
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## 🤝 Contribuciones
 
-## Stay in touch
+Las contribuciones son bienvenidas. Para cambios importantes:
+1. Fork el proyecto
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## 📄 Licencia
 
-## License
+Este proyecto es de código abierto y está disponible bajo la licencia MIT.
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+## 👨‍💻 Autor
+
+**Pablo**
+- GitHub Frontend: [@Pablodb22](https://github.com/Pablodb22/EnglishUpFrontend)
+- GitHub Backend: [@Pablodb22](https://github.com/Pablodb22/EnglishUpBackend)
+
+## 🙏 Agradecimientos
+
+- Google AI por su potente API de generación de contenido
+- Supabase por la infraestructura de base de datos
+- Vercel y Railway por el hosting gratuito
+- La comunidad de Next.js y NestJS
+
+---
+
+⭐ Si te ha gustado el proyecto, no olvides darle una estrella en GitHub!
